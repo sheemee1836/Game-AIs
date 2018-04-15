@@ -1,1 +1,1 @@
-# Othello-AI
+# Game AIs
