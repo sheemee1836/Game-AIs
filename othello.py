@@ -247,48 +247,6 @@ class Strategy():
 
     ################ strategies #################
 
-    def minmax_search(self, node, player, depth):
-        # determine best move for player recursively
-        # it may return a move, or a search node, depending on your design
-        # feel free to adjust the parameters
-        weights = SCORING_MATRIX[:]
-        board = node.board
-        if depth == 0:
-            node.score = self.score(board)
-            return node
-
-        my_moves = self.get_valid_moves(player)
-
-        children = []
-        for move in my_moves:
-            next_board = self.make_move(board, player, move)
-            next_player = self.next_player(next_board, player)
-            if self.is_corner(move):
-                weight_flip(move)
-            if next_player == None:
-                c = Node(next_board, move)
-                c.score = 1000 * self.score(next_board)
-                children.append(c)
-            else:
-                c = Node(next_board, move)
-                c.move = move
-                c.score = self.minmax_search(c, next_player, depth=depth - 1).score
-                children.append(c)
-
-                # return max(children, key = lambda x: x.score)
-        if player == BLACK:
-            winner = max(children, key=lambda x: x.score)
-        else:
-            winner = min(children, key=lambda x: x.score)
-        node.score = winner.score
-        return winner
-
-    def minmax_strategy(self, board, player, depth=4):
-        # calls minmax_search
-        # feel free to adjust the parameters
-        # returns an integer move
-        return self.minmax_search(Node(board, None), player, depth).move
-
     def alpha_beta(self, node, player, alpha, beta, depth):
         # determine best move for player recursively
         # it may return a move, or a search node, depending on your design
