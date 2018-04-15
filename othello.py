@@ -125,7 +125,8 @@ class Strategy():
         """Compute player's score). Takes into account weights of each square, move stability, mobility, and corners captured"""
         score = 10 * self.weight_score(board) + 30 * self.corner_score(board) + 5 * self.mobility_score(board) + 25 * self.stability_score(board, move)
         return score
-
+    
+    ####Scoring heruristics called by score()####
     def weight_score(self, board):
         b = 0
         w = 0
@@ -203,7 +204,9 @@ class Strategy():
         if (b + w != 0):
             return math.trunc(100 * (b - w) / (b + w))
         return 0
-
+    
+    ####end of scoring heruistics####
+    
     def is_corner(self, move):
         if move == 11 or move == 18 or move == 81 or move == 88:
             return True
@@ -219,7 +222,7 @@ class Strategy():
         """flips the weight of the squares surrounding a move. Mainly used on corner pieces"""
         for d in DIRECTIONS:
             weights[move + d] *= -1
-
+            
 
     def game_over(self, board, player):
         """Return true if player and opponent have no valid moves"""
