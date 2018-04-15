@@ -5,6 +5,7 @@ import math
 
 #### Othello Shell
 #### P. White 2016-2018
+#### Charles Wang
 
 
 EMPTY, BLACK, WHITE, OUTER = '.', '@', 'o', '?'
